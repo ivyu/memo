@@ -2,17 +2,24 @@ package com.memo.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "notes")
 
 public class Note {
     @PrimaryKey(autoGenerate = true)
-    private  int id;
+    private  int id = -1;
     @ColumnInfo(name = "text")
     private String noteText;
     @ColumnInfo(name = "date")
     private long noteDate;
+
+    @Ignore // we don't want to store this value on database so ignore it
+    private boolean checked = false;
+
+    public Note() {
+    }
 
     public Note(String noteText, long noteDate) {
         this.noteText = noteText;
@@ -41,5 +48,13 @@ public class Note {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", noteDate=" + noteDate +
+                '}';
     }
 }

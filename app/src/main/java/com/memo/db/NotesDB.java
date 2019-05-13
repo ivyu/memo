@@ -2,7 +2,7 @@ package com.memo.db;
 
 
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Entity;
+//import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
@@ -14,13 +14,13 @@ public abstract class NotesDB extends RoomDatabase {
     public abstract NotesDao notesDao();
 
     public static final String DATABASE_NAME = "notesDB";
-    private static NotesDB instances;
+    private static NotesDB instance;
 
     public static NotesDB getInstances(Context context) {
-        if(instances == null)
-            instances = Room.databaseBuilder(context,NotesDB.class,DATABASE_NAME)
+        if(instance == null)
+            instance = Room.databaseBuilder(context,NotesDB.class,DATABASE_NAME)
                     .allowMainThreadQueries()
                     .build();
-        return instances;
+        return instance;
     }
 }
